@@ -1,1 +1,1 @@
-package ru.shield.shorts; import android.content.*; public class BootReceiver extends BroadcastReceiver{public void onReceive(Context c,Intent i){c.startService(new Intent(c,GuardService.class));}}
+package ru.shield.shorts; import android.content.*; import android.os.Build; public class BootReceiver extends BroadcastReceiver{public void onReceive(Context c,Intent i){Intent x=new Intent(c,GuardService.class);if(Build.VERSION.SDK_INT>=26)c.startForegroundService(x);else c.startService(x);}}
