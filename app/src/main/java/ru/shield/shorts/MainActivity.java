@@ -13,7 +13,7 @@ public class MainActivity extends Activity {
     Button save=new Button(this);save.setText("Сохранить и включить защиту");l.addView(save);save.setOnClickListener(v->save());
     Button usage=new Button(this);usage.setText("1. Открыть доступ к статистике Android");l.addView(usage);usage.setOnClickListener(v->startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)));
     Button access=new Button(this);access.setText("2. Включить Shorts Guard в специальных возможностях");l.addView(access);access.setOnClickListener(v->startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)));
-    l.addView(t("После выдачи двух разрешений снова нажмите «Сохранить и включить защиту». Android покажет постоянное уведомление — это признак работающей защиты.",14)); setContentView(l);
+    l.addView(t("После выдачи двух разрешений снова нажмите «Сохранить и включить защиту». Лимит применяется только к YouTube; TikTok, Instagram и другие приложения не блокируются.",14)); setContentView(l);
   }
   void save(){int m=30;try{m=Integer.parseInt(minutes.getText().toString());}catch(Exception ignored){} if(m<1)m=30;getSharedPreferences(PREF,0).edit().putInt("limit",m).putString("pin",pin.getText().toString()).apply();if(Build.VERSION.SDK_INT>=26)startForegroundService(new Intent(this,GuardService.class));else startService(new Intent(this,GuardService.class));Toast.makeText(this,"Защита включена",Toast.LENGTH_SHORT).show();}
 }
